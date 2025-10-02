@@ -4,9 +4,9 @@ from .envs import Bandit, NonStationaryBandit
 from .agents import (
     BaseAgent,
     GreedyAgent,
-    EpsilonGreedyAgent, 
+    EpsilonGreedyAgent,
     UCBAgent,
-    GradientBanditAgent
+    GradientBanditAgent,
 )
 from .core import (
     Experiment,
@@ -16,7 +16,7 @@ from .core import (
     plot_comparison,
     plot_parameter_study,
     set_global_seed,
-    print_summary
+    print_summary,
 )
 
 __version__ = "0.1.0"
@@ -30,14 +30,14 @@ __all__ = [
     "BaseAgent",
     "GreedyAgent",
     "EpsilonGreedyAgent",
-    "UCBAgent", 
+    "UCBAgent",
     "GradientBanditAgent",
     # Core
     "Experiment",
     "RunResult",
     "run_multi_experiment",
     "plot_curves",
-    "plot_comparison", 
+    "plot_comparison",
     "plot_parameter_study",
     "set_global_seed",
     "print_summary",

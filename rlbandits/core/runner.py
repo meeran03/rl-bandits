@@ -9,10 +9,11 @@ from ..agents.base_agent import BaseAgent
 @dataclass
 class RunResult:
     """Container for single experiment run results."""
-    rewards: np.ndarray                # shape [T]
-    optimal_flags: np.ndarray          # bool, shape [T]
-    Q: np.ndarray                      # final Q estimates
-    N: np.ndarray                      # final action counts
+
+    rewards: np.ndarray  # shape [T]
+    optimal_flags: np.ndarray  # bool, shape [T]
+    Q: np.ndarray  # final Q estimates
+    N: np.ndarray  # final action counts
 
     @property
     def avg_reward(self) -> float:
@@ -33,13 +34,17 @@ class RunResult:
     @property
     def frac_optimal_last200(self) -> float:
         """Fraction of optimal actions over last 200 steps."""
-        tail = self.optimal_flags[-200:] if len(self.optimal_flags) >= 200 else self.optimal_flags
+        tail = (
+            self.optimal_flags[-200:]
+            if len(self.optimal_flags) >= 200
+            else self.optimal_flags
+        )
         return float(tail.mean())
 
 
 class Experiment:
     """Single- and multi-run evaluation for a bandit + agent."""
-    
+
     def __init__(self, bandit, agent: BaseAgent, steps: int = 1000):
         self.bandit = bandit
         self.agent = agent
@@ -68,14 +73,11 @@ class Experiment:
 
         rewards = np.asarray(rewards, dtype=float)
         optimal_flags = np.asarray(optimal_flags, dtype=bool)
-        
+
         # Agents may not have N (e.g., gradient bandit); fall back gracefully
         N = getattr(self.agent, "N", np.zeros(self.agent.k, dtype=int))
         Q = getattr(self.agent, "Q", np.zeros(self.agent.k, dtype=float))
-        
+
         return RunResult(
-            rewards=rewards, 
-            optimal_flags=optimal_flags, 
-            Q=Q.copy(), 
-            N=N.copy()
+            rewards=rewards, optimal_flags=optimal_flags, Q=Q.copy(), N=N.copy()
         )

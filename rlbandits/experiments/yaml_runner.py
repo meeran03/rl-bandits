@@ -1,9 +1,9 @@
 """YAML-based experiment configuration runner."""
 
 from __future__ import annotations
-import yaml
-import os
 from typing import Dict, Any, Type
+import os
+import yaml
 from ..envs import Bandit, NonStationaryBandit
 from ..agents import (
     BaseAgent,
@@ -142,7 +142,7 @@ class YAMLExperimentRunner:
         """Run experiment and generate plots."""
         results = self.run_experiment()
 
-        print(f"\n📊 Generating plots...")
+        print("\n📊 Generating plots...")
         self.plot_results(results)
 
         print(f"\n✅ Experiment '{self.config['experiment']['name']}' completed!")
@@ -174,7 +174,7 @@ def run_all_experiments(experiments_dir: str = None) -> None:
             print(f"❌ Error running {yaml_file}: {e}")
             continue
 
-    print(f"\n🎉 All experiments completed!")
+    print("\n🎉 All experiments completed!")
 
 
 if __name__ == "__main__":

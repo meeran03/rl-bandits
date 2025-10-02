@@ -7,8 +7,10 @@ from .base_agent import BaseAgent
 
 class GreedyAgent(BaseAgent):
     """Pure greedy with sample-average updates (α_n = 1/n) or constant step-size."""
-    
-    def __init__(self, k: int = 10, seed: int | None = None, alpha: float | None = None):
+
+    def __init__(
+        self, k: int = 10, seed: int | None = None, alpha: float | None = None
+    ):
         super().__init__(k=k, seed=seed)
         self.Q = np.zeros(k, dtype=float)
         self.N = np.zeros(k, dtype=int)
@@ -40,8 +42,14 @@ class GreedyAgent(BaseAgent):
 
 class EpsilonGreedyAgent(GreedyAgent):
     """ε-greedy action selection with sample-average or constant step-size updates."""
-    
-    def __init__(self, k: int = 10, epsilon: float = 0.1, seed: int | None = None, alpha: float | None = None):
+
+    def __init__(
+        self,
+        k: int = 10,
+        epsilon: float = 0.1,
+        seed: int | None = None,
+        alpha: float | None = None,
+    ):
         super().__init__(k=k, seed=seed, alpha=alpha)
         self.epsilon = epsilon
 

@@ -7,7 +7,7 @@ from .base_agent import BaseAgent
 
 class GradientBanditAgent(BaseAgent):
     """Gradient bandit with preference-based updates."""
-    
+
     def __init__(self, k: int = 10, alpha: float = 0.1, seed: int | None = None):
         super().__init__(k=k, seed=seed)
         self.H = np.zeros(k, dtype=float)  # Preferences
@@ -25,7 +25,9 @@ class GradientBanditAgent(BaseAgent):
     def update(self, action: int, reward: float) -> None:
         """Update preferences using gradient ascent."""
         self.time_step += 1
-        self.avg_reward += (reward - self.avg_reward) / self.time_step  # Incremental average
+        self.avg_reward += (
+            reward - self.avg_reward
+        ) / self.time_step  # Incremental average
 
         for a in range(self.k):
             if a == action:

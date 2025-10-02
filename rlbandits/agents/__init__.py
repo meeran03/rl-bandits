@@ -7,8 +7,8 @@ from .gradient_bandit import GradientBanditAgent
 
 __all__ = [
     "BaseAgent",
-    "GreedyAgent", 
+    "GreedyAgent",
     "EpsilonGreedyAgent",
     "UCBAgent",
-    "GradientBanditAgent"
+    "GradientBanditAgent",
 ]

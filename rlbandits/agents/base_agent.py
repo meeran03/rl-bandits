@@ -6,7 +6,7 @@ import numpy as np
 
 class BaseAgent:
     """Common interface all bandit agents must implement."""
-    
+
     def __init__(self, k: int = 10, seed: int | None = None):
         self.k = k
         self.rng = np.random.default_rng(seed)

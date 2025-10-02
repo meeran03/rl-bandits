@@ -5,7 +5,6 @@ from typing import Type, Dict, Any
 import numpy as np
 from .runner import Experiment
 from ..agents.base_agent import BaseAgent
-from ..envs.stationary_bandit import Bandit
 
 
 def run_multi_experiment(
@@ -14,11 +13,11 @@ def run_multi_experiment(
     agent: BaseAgent,
     steps: int = 1000,
     runs: int = 200,
-    warm_start: bool = True
+    warm_start: bool = True,
 ) -> Dict[str, np.ndarray]:
     """
     Run multiple experiments and return averaged curves.
-    
+
     Args:
         bandit_class: Class of bandit environment to use
         bandit_kwargs: Keyword arguments for bandit constructor
@@ -26,7 +25,7 @@ def run_multi_experiment(
         steps: Number of steps per run
         runs: Number of runs to average over
         warm_start: Whether to do warm start (pull each arm once)
-        
+
     Returns:
         Dictionary with 'avg_reward' and 'avg_optimal' curves
     """
@@ -39,14 +38,14 @@ def run_multi_experiment(
         # Fresh env & agent per run (vary env seed; keep/record agent seed as you wish)
         bandit = bandit_class(seed=i, **bandit_kwargs)
         agent.reset(seed=i)  # or keep fixed seed; just be consistent
-        
+
         exp = Experiment(bandit, agent, steps=steps)
         result = exp.run(warm_start=warm_start)
-        
+
         avg_reward += result.rewards
         avg_opt += result.optimal_flags.astype(float)
 
     avg_reward /= runs
     avg_opt /= runs
-    
+
     return {"avg_reward": avg_reward, "avg_optimal": avg_opt}
