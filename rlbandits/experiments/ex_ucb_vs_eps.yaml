@@ -1,0 +1,53 @@
+# UCB vs ε-Greedy comparison
+# Compare UCB with different confidence parameters against ε-greedy
+
+experiment:
+  name: "UCB vs ε-Greedy Comparison"
+  description: "Compare UCB algorithm with different c values against ε-greedy"
+  
+bandit:
+  class: "Bandit"
+  k: 10
+  reward_std: 1.0
+
+runs:
+  steps: 1000
+  num_runs: 200
+  warm_start: true
+
+agents:
+  - name: "ε-Greedy (ε=0.01)"
+    class: "EpsilonGreedyAgent"
+    params:
+      k: 10
+      epsilon: 0.01
+      
+  - name: "ε-Greedy (ε=0.1)"
+    class: "EpsilonGreedyAgent"
+    params:
+      k: 10
+      epsilon: 0.1
+      
+  - name: "UCB (c=1)"
+    class: "UCBAgent"
+    params:
+      k: 10
+      c: 1.0
+      
+  - name: "UCB (c=2)"
+    class: "UCBAgent"
+    params:
+      k: 10
+      c: 2.0
+      
+  - name: "UCB (c=√2)"
+    class: "UCBAgent"
+    params:
+      k: 10
+      c: 1.414  # sqrt(2)
+
+plotting:
+  title: "UCB vs ε-Greedy Algorithm Comparison"
+  save_path: "results/ucb_vs_epsilon_greedy.png"
+  figsize: [16, 8]
+  style: "comparison"

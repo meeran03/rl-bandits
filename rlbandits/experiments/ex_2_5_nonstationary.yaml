@@ -1,0 +1,50 @@
+# Exercise 2.5: Non-stationary bandit comparison
+# Compare sample-average vs constant step-size in non-stationary environment
+
+experiment:
+  name: "Exercise 2.5 - Non-stationary Bandit"
+  description: "Compare greedy and ε-greedy with different update rules in non-stationary environment"
+  
+bandit:
+  class: "NonStationaryBandit"
+  k: 10
+  reward_std: 1.0
+  walk_std: 0.01
+
+runs:
+  steps: 1000
+  num_runs: 200
+  warm_start: false
+
+agents:
+  - name: "Greedy (sample-average)"
+    class: "GreedyAgent"
+    params:
+      k: 10
+      alpha: null  # Use sample average (1/n)
+      
+  - name: "Greedy (α=0.1)"
+    class: "GreedyAgent" 
+    params:
+      k: 10
+      alpha: 0.1
+      
+  - name: "ε-Greedy (sample-average)"
+    class: "EpsilonGreedyAgent"
+    params:
+      k: 10
+      epsilon: 0.1
+      alpha: null
+      
+  - name: "ε-Greedy (α=0.1)"
+    class: "EpsilonGreedyAgent"
+    params:
+      k: 10
+      epsilon: 0.1
+      alpha: 0.1
+
+plotting:
+  title: "Exercise 2.5: Sample-Average vs Constant Step-Size (Non-stationary)"
+  save_path: "results/ex_2_5_nonstationary.png"
+  figsize: [16, 8]
+  style: "comparison"  # Uses plot_comparison for multiple agents

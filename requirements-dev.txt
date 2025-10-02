@@ -1,0 +1,18 @@
+# Development and optional dependencies
+black>=22.0.0
+flake8>=5.0.0
+mypy>=1.0.0
+jupyter>=1.0.0
+notebook>=6.4.0
+
+# Additional testing tools
+pytest-xdist>=3.0.0  # Parallel test execution
+pytest-mock>=3.10.0  # Mocking utilities
+
+# Documentation (optional)
+sphinx>=5.0.0
+sphinx-rtd-theme>=1.0.0
+
+# Packaging tools
+build>=0.8.0
+twine>=4.0.0

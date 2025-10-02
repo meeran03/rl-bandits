@@ -1,0 +1,47 @@
+# Gradient Bandit Algorithm Experiment
+# Test gradient bandit with different learning rates
+
+experiment:
+  name: "Gradient Bandit Algorithm"
+  description: "Test gradient bandit algorithm with different learning rates"
+  
+bandit:
+  class: "Bandit"
+  k: 10
+  reward_std: 1.0
+
+runs:
+  steps: 1000
+  num_runs: 200
+  warm_start: false
+
+agents:
+  - name: "Gradient Bandit (α=0.01)"
+    class: "GradientBanditAgent"
+    params:
+      k: 10
+      alpha: 0.01
+      
+  - name: "Gradient Bandit (α=0.1)"
+    class: "GradientBanditAgent"
+    params:
+      k: 10
+      alpha: 0.1
+      
+  - name: "Gradient Bandit (α=0.4)"
+    class: "GradientBanditAgent"
+    params:
+      k: 10
+      alpha: 0.4
+      
+  - name: "ε-Greedy (ε=0.1) [baseline]"
+    class: "EpsilonGreedyAgent"
+    params:
+      k: 10
+      epsilon: 0.1
+
+plotting:
+  title: "Gradient Bandit Algorithm: Learning Rate Study"
+  save_path: "results/gradient_bandit.png"
+  figsize: [16, 8]
+  style: "parameter_study"  # This is a parameter study of alpha values
